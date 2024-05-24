@@ -23,7 +23,11 @@ tw-story[tags="Tag1"]{
     
 }
 
-
+tw-story[tags="combat"]{
+  img {
+	width: 700px;
+  }
+}
 tw-story[tags="Bad"]{
   img {
 	width: 500px;
@@ -68,7 +72,8 @@ img {
 (set: $exploreSpaceStationWithResource to false)
 (set: $sacrificePeople to false)
 (set: $firstTime to false)
-(set: $Blast to false)</tw-passagedata><tw-passagedata pid="5" name="Discover a planet" tags="" position="1475,125" size="100,100">We discover a crimsom red planet surrounded with rings of rock and ice, What would you do?
+(set: $Blast to false)
+(set: $winFight to false)</tw-passagedata><tw-passagedata pid="5" name="Discover a planet" tags="" position="1475,125" size="100,100">We discover a crimsom red planet surrounded with rings of rock and ice, What would you do?
 
 [[Proceed with caution, scanning for any signs of life..|Alient Inhabitant]]
 [[Ignore the planet and continue on your original course.|Alien Combat]]
@@ -82,24 +87,27 @@ img {
 &lt;img src=&quot;Audio/alien.png&quot; alt=&quot;Description&quot; /&gt;</tw-passagedata><tw-passagedata pid="8" name="Piece with alien" tags="" position="1525,800" size="100,100">Us and the aliens co-exist peacfully and no further threats would come to us and we move on the explore marking the planet as one of our peacful tertory
 [[as we board the starship...|Arch Reactor]]
 
-&lt;img src=&quot;Audio/spaceship.png&quot; alt=&quot;Description&quot; /&gt;</tw-passagedata><tw-passagedata pid="9" name="Alien Capture" tags="" position="1575,525" size="100,100">Your crew overthrowned the alien and captured it in your starship, now the planet is all yours[[...but|Alien Combat]]</tw-passagedata><tw-passagedata pid="10" name="Alien Combat" tags="" position="1625,300" size="100,100">You could see a humongous spaceship with a huge armed force alien life, threatening you to surrender (if: not $exploreSpaceStationWithResource and $firstTime)[and to the suprise Our crew is betrayed by the rescued astronauts, they are in fact the alien race in disguise]
+&lt;img src=&quot;Audio/spaceship.png&quot; alt=&quot;Description&quot; /&gt;</tw-passagedata><tw-passagedata pid="9" name="Alien Capture" tags="" position="1575,525" size="100,100">Your crew overthrowned the alien and captured it in your starship, now the planet is all yours[[...but|Alien Combat]]</tw-passagedata><tw-passagedata pid="10" name="Alien Combat" tags="combat" position="1625,300" size="100,100">You could see a humongous spaceship with a huge armed force alien life, threatening you to surrender (if: not $exploreSpaceStationWithResource and $firstTime)[and to the suprise Our crew is betrayed by the rescued astronauts, they are in fact the alien race in disguise]
 
 what would you do?
 
-(if: $exploreSpaceStationWithResource)[[[Fight with our crewmates|Arch Reactor]]]
-(else-if: not $exploreSpaceStationWithResource)[[[Fight with our crewmates|Bad Ending]]]
 [[Sacrifice some crewmates and escape|Arch Reactor]](set: $sacrificePeople to true)
+(if: $exploreSpaceStationWithResource)[[[Fight with our crewmates|Win Fight]]]
+(else-if: not $exploreSpaceStationWithResource)[[[Fight with our crewmates|Bad Ending]]]
+
 
 &lt;img src=&quot;Audio/alienspace.webp&quot; alt=&quot;Description&quot; /&gt;</tw-passagedata><tw-passagedata pid="11" name="Bad Ending" tags="Bad" position="1625,125" size="100,100">(if: $Blast)[
    Activating the artifact triggers a catastrophic chain of events, leading to the demise of    your crew and the destruction of your ship.]
 
 (else:)[The aliens overpowered our crew and destroyed the starship....]
 
-&lt;img src=&quot;Audio/bad.png&quot; alt=&quot;Description&quot; /&gt;</tw-passagedata><tw-passagedata pid="12" name="Arch Reactor" tags="" position="1800,600" size="100,100">We discover an enigmatic power artifact part, what should we do?
+&lt;img src=&quot;Audio/bad.png&quot; alt=&quot;Description&quot; /&gt;</tw-passagedata><tw-passagedata pid="12" name="Arch Reactor" tags="" position="1950,675" size="100,100">We discover an enigmatic power artifact part, what should we do?
 
-[[Leave the artifact untouched for now, fearing its unknown powers.|Approach the space station]]
 (if: $exploreSpaceStationWithResource)[[[Activate the artifact, hoping for a beneficial outcome.|Good Ending]]]
-(else-if: not $exploreSpaceStationWithResource)[[[Activate the artifact, hoping for a beneficial outcome.|Bad Ending]]](set: $Blast to true)
+(else-if: not $exploreSpaceStationWithResource)[
+[[Leave the artifact untouched for now, fearing its unknown powers.|Approach the space station]]
+[[Activate the artifact, hoping for a beneficial outcome.|Bad Ending]](set: $Blast to true)
+]
 
 &lt;img src=&quot;Audio/arc.png&quot; alt=&quot;Description&quot; /&gt;
 </tw-passagedata><tw-passagedata pid="13" name="Good Ending" tags="" position="1775,0" size="100,100">As we were having the missing arc reactor piece, we could successfully activate it ensuring abanduct energy resource and the success of your mission. : )
@@ -118,7 +126,7 @@ what would you do?
     (goto: &quot;Discover a planet&quot;)
 ]
 
-&lt;img src=&quot;Audio/astro.png&quot; alt=&quot;Description&quot; /&gt;</tw-passagedata></tw-storydata>
+&lt;img src=&quot;Audio/astro.png&quot; alt=&quot;Description&quot; /&gt;</tw-passagedata><tw-passagedata pid="15" name="Win Fight" tags="" position="1750,425" size="100,100">You have successfully won the combat against the alien spaceship with the special weapons from the abadoned space station. [[Continue|Arch Reactor]]</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
